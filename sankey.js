@@ -63,24 +63,28 @@ const data = {
   ]
 };
 
+// Rothko-inspired column colors: rust → rose → ochre → slate → plum.
 const COLORS = [
-  "#b4472e", // accent
-  "#d08b6d",
-  "#8a9a5b",
-  "#5b7a8a",
-  "#6b5b8a"
+  "#a74728", // rust
+  "#c47a67", // rose
+  "#c08a2e", // ochre
+  "#2b4152", // slate
+  "#4e2432"  // plum
 ];
+const SANKEY_MIN_WIDTH = 720;
 
 function render() {
   const container = document.getElementById("sankey");
   if (!container) return;
   container.innerHTML = "";
 
-  const width = container.clientWidth - 32;
+  const width = Math.max(container.clientWidth - 40, SANKEY_MIN_WIDTH);
   const height = 460;
 
   const svg = d3.select(container).append("svg")
     .attr("viewBox", `0 0 ${width} ${height}`)
+    .attr("width", width)
+    .attr("height", height)
     .attr("preserveAspectRatio", "xMidYMid meet");
 
   const sankey = d3.sankey()

@@ -6,10 +6,19 @@
   <title>Papers · Akshara Raje</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+
+  <div class="painting" aria-hidden="true">
+    <span class="field f1"></span>
+    <span class="field f2"></span>
+    <span class="field f3"></span>
+    <span class="field f4"></span>
+    <span class="field f5"></span>
+  </div>
+
   <nav class="nav">
     <a href="index.html" class="brand">akshara raje</a>
     <div class="nav-links">
@@ -20,28 +29,127 @@
   </nav>
 
   <main>
-    <section class="section">
+    <section class="section reveal">
       <div class="section-head">
-        <h2>Research threads</h2>
+        <h2 data-marker="i.">research threads</h2>
         <p class="section-sub">Each paper, where it fits, what's next.</p>
       </div>
       <div id="sankey-threads" class="sankey"></div>
+      <p class="scroll-hint">← scroll →</p>
       <p class="caption">Papers connect to the themes they explore and to the questions I want to pursue next.</p>
     </section>
 
-    <section class="section">
-      <div class="section-head"><h2>All papers</h2></div>
+    <section class="section reveal">
+      <div class="section-head"><h2 data-marker="ii.">all papers</h2></div>
       <ol class="papers">
+
         <li>
           <div class="paper-title">Language as Evidence: A Forensic Investigation of Silent Jurisdictional Assumptions in a Reasoning Model</div>
           <div class="paper-meta"><strong>Akshara Raje</strong> · preprint, 2026 · <a href="assets/jurisdiction-model-forensics.pdf">pdf</a></div>
           <div class="paper-note">A language model asked a legal question in a language where no country is named still has to assume one. I investigate why Qwen3.6-27B tells English-speaking users its answer depends on where they live, whereas it answers the same questions in Chinese under mainland Chinese law without flagging the assumption. Using the model-forensics protocol, I read the model's reasoning to form hypotheses and test each with an intervention: rewriting Chinese questions in Traditional characters, forcing a casual style, resampling just before the model names a country. The behavior reflects an inference the model treats as settled rather than a failure to notice ambiguity.</div>
+
+          <div class="diagram diag-lang" data-diagram="lang">
+            <svg viewBox="0 0 640 260" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: same legal question in English and Chinese produces different behavior">
+              <g class="lane lane-en" data-lane="en">
+                <rect class="box" x="12" y="30" width="150" height="52" fill="#f4ecd8" stroke="#c6b797"/>
+                <text x="87" y="54" text-anchor="middle" class="label-strong" font-size="13" fill="#1f1611">prompt (English)</text>
+                <text x="87" y="72" text-anchor="middle" class="label-small">“am I eligible for unemployment benefits?”</text>
+
+                <path class="flow-arrow" d="M162,56 L212,56" marker-end="url(#arrow-mut-p)"/>
+
+                <rect class="box" x="222" y="30" width="130" height="52" fill="#ede3cf" stroke="#a74728"/>
+                <text x="287" y="62" text-anchor="middle" class="label-strong" font-size="13" fill="#1f1611">reasoning model</text>
+
+                <path class="flow-arrow" d="M352,56 L402,56" marker-end="url(#arrow-mut-p)"/>
+
+                <rect class="box" x="412" y="22" width="216" height="68" fill="#f4ecd8" stroke="#c6b797"/>
+                <text x="520" y="46" text-anchor="middle" font-size="12" fill="#3a2f28">“depends on your state”</text>
+                <text x="520" y="64" text-anchor="middle" class="label-small">assumption disclosed</text>
+                <text x="520" y="80" text-anchor="middle" font-size="11" fill="#a74728" font-style="italic">appropriate reliance signal</text>
+              </g>
+
+              <g class="lane lane-zh" data-lane="zh">
+                <rect class="box" x="12" y="166" width="150" height="52" fill="#f4ecd8" stroke="#c6b797"/>
+                <text x="87" y="192" text-anchor="middle" class="label-strong" font-size="13" fill="#1f1611">prompt (Chinese)</text>
+                <text x="87" y="210" text-anchor="middle" class="label-small">same question, 简体中文</text>
+
+                <path class="flow-arrow" d="M162,192 L212,192" marker-end="url(#arrow-mut-p)"/>
+
+                <rect class="box" x="222" y="166" width="130" height="52" fill="#ede3cf" stroke="#a74728"/>
+                <text x="287" y="198" text-anchor="middle" class="label-strong" font-size="13" fill="#1f1611">reasoning model</text>
+
+                <g class="hidden-assumption">
+                  <rect x="222" y="124" width="130" height="34" fill="#4e2432" opacity="0.92"/>
+                  <text x="287" y="146" text-anchor="middle" font-size="11" fill="#f4ecd8" font-style="italic">silently assumes: mainland China</text>
+                </g>
+
+                <path class="flow-arrow" d="M352,192 L402,192" marker-end="url(#arrow-mut-p)"/>
+
+                <rect class="box" x="412" y="158" width="216" height="68" fill="#f4ecd8" stroke="#c6b797"/>
+                <text x="520" y="182" text-anchor="middle" font-size="12" fill="#3a2f28">answers under PRC law</text>
+                <text x="520" y="200" text-anchor="middle" class="label-small">assumption not flagged</text>
+                <text x="520" y="216" text-anchor="middle" font-size="11" fill="#4e2432" font-style="italic">silent default</text>
+              </g>
+
+              <defs>
+                <marker id="arrow-mut-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#7a6a5a"/>
+                </marker>
+              </defs>
+            </svg>
+            <p class="d-caption">Hover a lane to focus. The hidden layer under the Chinese lane is what the model is quietly assuming.</p>
+          </div>
         </li>
+
         <li>
           <div class="paper-title">Position: Accountability Mechanisms Are Adopted Only When the Verifier Pays Nothing</div>
           <div class="paper-meta"><strong>Akshara Raje</strong> · preprint, 2026 · <a href="assets/provocation-paper.pdf">pdf</a></div>
           <div class="paper-note">Proposals for accountability in agent-mediated work (AI use statements, detection, watermarking, content provenance) presuppose that the parties who would rely on them want them. I report a complete enumeration of 2,942 active job-posting queues on Upwork and Freelancer, hand-coded against a preregistered scheme and validated against injected positive controls. Requests for AI disclosure are near zero in either market. The mechanisms clients <em>do</em> adopt share a property the provenance stack lacks: each is free to the client, with its cost falling on the applicant. I argue cost incidence by whom pays to verify should be treated as a first-class design constraint, and that demand for accountability should be measured rather than assumed.</div>
+
+          <div class="diagram diag-cost" data-diagram="cost">
+            <svg viewBox="0 0 640 280" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Diagram: adoption rate of accountability mechanisms by who bears the cost of verifying">
+              <line class="axis" x1="200" y1="22" x2="200" y2="258"/>
+              <line class="axis" x1="200" y1="258" x2="620" y2="258"/>
+
+              <text x="200" y="272" text-anchor="start" class="ticks">0%</text>
+              <text x="410" y="272" text-anchor="middle" class="ticks">~50%</text>
+              <text x="620" y="272" text-anchor="end" class="ticks">adoption</text>
+
+              <g class="row">
+                <text x="192" y="48" text-anchor="end" class="bar-label">“no AI” declarations</text>
+                <text x="192" y="62" text-anchor="end" class="pay">applicant pays</text>
+                <rect class="bar" x="200" y="34" width="360" height="24" fill="#a74728"/>
+                <text x="572" y="51" text-anchor="start" class="bar-label">frequent</text>
+              </g>
+              <g class="row">
+                <text x="192" y="94" text-anchor="end" class="bar-label">screen recordings</text>
+                <text x="192" y="108" text-anchor="end" class="pay">applicant pays</text>
+                <rect class="bar" x="200" y="80" width="280" height="24" fill="#a74728"/>
+                <text x="492" y="97" text-anchor="start" class="bar-label">common</text>
+              </g>
+              <g class="row">
+                <text x="192" y="140" text-anchor="end" class="bar-label">hidden prompts</text>
+                <text x="192" y="154" text-anchor="end" class="pay">applicant pays</text>
+                <rect class="bar" x="200" y="126" width="200" height="24" fill="#c08a2e"/>
+                <text x="412" y="143" text-anchor="start" class="bar-label">seen</text>
+              </g>
+              <g class="row">
+                <text x="192" y="186" text-anchor="end" class="bar-label">AI disclosure</text>
+                <text x="192" y="200" text-anchor="end" class="pay">verifier pays</text>
+                <rect class="bar" x="200" y="172" width="6" height="24" fill="#4e2432"/>
+                <text x="218" y="189" text-anchor="start" class="bar-label">≈ 0</text>
+              </g>
+              <g class="row">
+                <text x="192" y="232" text-anchor="end" class="bar-label">watermarking / provenance</text>
+                <text x="192" y="246" text-anchor="end" class="pay">verifier pays</text>
+                <rect class="bar" x="200" y="218" width="3" height="24" fill="#4e2432"/>
+                <text x="215" y="235" text-anchor="start" class="bar-label">≈ 0</text>
+              </g>
+            </svg>
+            <p class="d-caption">Mechanisms whose cost falls on the applicant are routinely requested; those whose cost falls on the verifier are not.</p>
+          </div>
         </li>
+
       </ol>
     </section>
 
@@ -53,7 +161,7 @@
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3"></script>
   <script>
-    // Research-threads Sankey: Papers → Themes → PhD questions
+    // Research-threads Sankey. Papers → themes → PhD questions.
     const data = {
       nodes: [
         { id: "paper1", name: "Language as Evidence",       col: 0 },
@@ -62,9 +170,9 @@
         { id: "t2",     name: "Silent defaults",            col: 1 },
         { id: "t3",     name: "Empirical census",           col: 1 },
         { id: "t4",     name: "Cost incidence",             col: 1 },
-        { id: "q1",     name: "Appropriate reliance",   col: 2 },
-        { id: "q2",     name: "End-user customization", col: 2 },
-        { id: "q3",     name: "Hidden assumptions",     col: 2 }
+        { id: "q1",     name: "Appropriate reliance",       col: 2 },
+        { id: "q2",     name: "End-user customization",     col: 2 },
+        { id: "q3",     name: "Hidden assumptions",         col: 2 }
       ],
       links: [
         { source: "paper1", target: "t1", value: 3 },
@@ -79,15 +187,19 @@
         { source: "t4", target: "q2", value: 2 }
       ]
     };
-    const COLORS = ["#b4472e","#8a9a5b","#5b7a8a"];
+    const COLORS = ["#a74728","#c08a2e","#4e2432"]; // rust, ochre, plum
+    const MIN_WIDTH = 640;
     function render() {
       const c = document.getElementById("sankey-threads");
       c.innerHTML = "";
-      const width = c.clientWidth - 32, height = 360;
+      const width = Math.max(c.clientWidth - 40, MIN_WIDTH);
+      const height = 380;
       const svg = d3.select(c).append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("width", width)
+        .attr("height", height)
         .attr("preserveAspectRatio", "xMidYMid meet");
-      const sankey = d3.sankey().nodeId(d=>d.id).nodeWidth(12).nodePadding(14)
+      const sankey = d3.sankey().nodeId(d=>d.id).nodeWidth(12).nodePadding(16)
         .extent([[8,8],[width-8,height-8]]);
       const g = sankey({ nodes: data.nodes.map(d=>({...d})), links: data.links.map(d=>({...d})) });
       const color = d => COLORS[d.col % COLORS.length];
@@ -110,5 +222,6 @@
     let t; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(render, 150); });
     document.addEventListener("DOMContentLoaded", render);
   </script>
+  <script src="interactions.js"></script>
 </body>
 </html>

@@ -1,14 +1,35 @@
+/* ----------------------------------------------------------
+   Palette: Rothko-inspired. Warm cream, deep rust, plum,
+   ochre, slate. Used as fields rather than accents where
+   possible — colors breathe next to each other, not on top.
+   ---------------------------------------------------------- */
 :root {
-  --bg: #faf7f2;
-  --ink: #1a1a1a;
-  --muted: #666;
-  --rule: #e8e2d6;
-  --accent: #b4472e;
-  --accent-soft: #e8a897;
-  --paper: #ffffff;
+  --bg:        #ede3cf;    /* unprimed canvas */
+  --paper:     #f4ecd8;    /* slightly warmer card */
+  --ink:       #1f1611;    /* warm black */
+  --ink-soft:  #3a2f28;
+  --muted:     #7a6a5a;    /* warm sepia */
+  --rule:      #c6b797;    /* soft ochre rule */
+
+  --rust:      #a74728;    /* burnt sienna, primary accent */
+  --plum:      #4e2432;    /* deep plum */
+  --ochre:     #c08a2e;    /* mustard ochre */
+  --slate:     #2b4152;    /* deep slate — occasional contrast */
+  --rose:      #c47a67;    /* soft rose, highlights */
+
+  --field-1: var(--rust);
+  --field-2: var(--plum);
+  --field-3: var(--ochre);
+  --field-4: var(--slate);
+  --field-5: var(--rose);
 }
 
 * { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 html, body {
   margin: 0;
@@ -16,227 +37,506 @@ html, body {
   background: var(--bg);
   color: var(--ink);
   font-family: 'Inter', -apple-system, system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+body { overflow-x: hidden; }
 
 main {
-  max-width: 760px;
+  max-width: 740px;
   margin: 0 auto;
-  padding: 0 32px 96px;
+  padding: 0 32px 112px;
 }
 
-/* nav */
+a { color: inherit; }
+
+/* ----------------------------------------------------------
+   Rothko header band — three stacked color fields.
+   A small, intentional signature at the top of every page.
+   Thin on desktop, thinner on mobile. Carries the palette
+   signal without being decorative noise.
+   ---------------------------------------------------------- */
+.painting {
+  width: 100%;
+  display: block;
+  background: var(--bg);
+}
+.painting .field {
+  display: block;
+  width: 100%;
+}
+.painting .f1 { background: var(--rust); height: 28px; }
+.painting .f2 { background: var(--bg);  height: 8px; }
+.painting .f3 { background: var(--plum); height: 22px; }
+.painting .f4 { background: var(--bg);  height: 6px; }
+.painting .f5 { background: var(--ochre); height: 14px; }
+
+/* ----------------------------------------------------------
+   Nav
+   ---------------------------------------------------------- */
 .nav {
-  max-width: 760px;
+  max-width: 740px;
   margin: 0 auto;
-  padding: 32px;
+  padding: 36px 32px 8px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-family: 'Fraunces', Georgia, serif;
+  align-items: baseline;
 }
 .brand {
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  letter-spacing: -0.005em;
   text-decoration: none;
   color: var(--ink);
 }
+.nav-links {
+  display: flex;
+  gap: 22px;
+}
 .nav-links a {
-  margin-left: 20px;
   color: var(--muted);
   text-decoration: none;
   font-size: 0.95rem;
-  transition: color 0.15s;
+  padding: 4px 0;
+  transition: color 0.2s;
+  position: relative;
 }
-.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--rust);
+}
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--rust);
+}
 
-/* hero */
+/* ----------------------------------------------------------
+   Hero
+   ---------------------------------------------------------- */
 .hero {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 40px;
+  gap: 48px;
   align-items: start;
-  margin: 24px 0 72px;
+  margin: 32px 0 88px;
 }
 .hero-text h1 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 2.4rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  margin: 0 0 8px;
-  line-height: 1.1;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 3.4rem;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.0;
+  margin: 0 0 14px;
+  color: var(--ink);
 }
 .tagline {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Instrument Serif', Georgia, serif;
   font-style: italic;
-  font-size: 1.05rem;
-  color: var(--accent);
-  margin: 0 0 20px;
-  min-height: 1.6em;
+  font-size: 1.25rem;
+  color: var(--rust);
+  margin: 0 0 22px;
+  min-height: 1.5em;
+  letter-spacing: 0.005em;
 }
 .bio {
-  font-size: 1.02rem;
-  color: #333;
-  margin: 0 0 20px;
-  max-width: 56ch;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 24px;
+  max-width: 54ch;
 }
 .contact {
   font-size: 0.95rem;
   color: var(--muted);
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 10px;
+  align-items: center;
 }
+.contact .sep { opacity: 0.5; }
 .contact a {
   color: var(--muted);
   text-decoration: none;
   border-bottom: 1px solid var(--rule);
-  transition: color 0.15s, border-color 0.15s;
+  padding: 2px 0;
+  transition: color 0.2s, border-color 0.2s;
 }
-.contact a:hover { color: var(--accent); border-color: var(--accent); }
+.contact a:hover { color: var(--rust); border-color: var(--rust); }
 
 .hero-photo img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
   display: block;
+  filter: saturate(0.92) contrast(1.02);
 }
 
-/* sections */
-.section { margin: 56px 0; }
+/* ----------------------------------------------------------
+   Sections — accented with a left color rule that cycles
+   through Rothko fields. Section headings in serif italic,
+   lowercase, with a small roman numeral marker.
+   ---------------------------------------------------------- */
+.section {
+  margin: 72px 0;
+  padding-left: 20px;
+  border-left: 2px solid transparent;
+  position: relative;
+}
+.section:nth-of-type(1) { border-left-color: var(--rust); }
+.section:nth-of-type(2) { border-left-color: var(--plum); }
+.section:nth-of-type(3) { border-left-color: var(--ochre); }
+.section:nth-of-type(4) { border-left-color: var(--slate); }
+.section:nth-of-type(5) { border-left-color: var(--rose); }
+
 .section-head {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: 0 0 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--rule);
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 26px;
 }
 .section-head h2 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  font-size: 1.9rem;
+  letter-spacing: -0.005em;
   margin: 0;
-  letter-spacing: -0.01em;
+  color: var(--ink);
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+.section-head h2::before {
+  content: attr(data-marker);
+  font-size: 0.85rem;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  color: var(--rust);
+  letter-spacing: 0.1em;
 }
 .section-sub {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--muted);
   font-style: italic;
+  font-family: 'Newsreader', Georgia, serif;
 }
 .section-link {
   font-size: 0.9rem;
-  color: var(--accent);
+  color: var(--rust);
   text-decoration: none;
+  border-bottom: 1px solid currentColor;
 }
-.section-link:hover { text-decoration: underline; }
+.section-link:hover { color: var(--plum); }
 
-/* sankey */
+/* ----------------------------------------------------------
+   Sankey — horizontal scroll on mobile. Minimum width in JS
+   so labels stay readable. Container is a quiet card.
+   ---------------------------------------------------------- */
 .sankey {
   width: 100%;
   min-height: 440px;
   background: var(--paper);
+  padding: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
   border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 16px;
-  overflow: hidden;
 }
-.sankey svg { display: block; width: 100%; height: auto; }
+.sankey svg { display: block; height: auto; }
+
 .sankey .node rect {
   cursor: pointer;
-  stroke-width: 0;
-  transition: opacity 0.2s;
+  stroke: none;
+  transition: opacity 0.25s ease;
 }
 .sankey .node text {
   font-family: 'Inter', sans-serif;
   font-size: 11.5px;
   fill: var(--ink);
   pointer-events: none;
+  letter-spacing: 0.005em;
 }
 .sankey .link {
   fill: none;
-  stroke-opacity: 0.35;
-  transition: stroke-opacity 0.2s;
+  stroke-opacity: 0.4;
+  transition: stroke-opacity 0.25s ease;
   cursor: pointer;
 }
-.sankey .link:hover { stroke-opacity: 0.75; }
+.sankey .link:hover { stroke-opacity: 0.82; }
 .sankey.dim .link:not(.highlight) { stroke-opacity: 0.08; }
-.sankey.dim .node:not(.highlight) rect { opacity: 0.25; }
-.sankey.dim .node:not(.highlight) text { opacity: 0.3; }
+.sankey.dim .node:not(.highlight) rect { opacity: 0.22; }
+.sankey.dim .node:not(.highlight) text { opacity: 0.28; }
 
 .caption {
-  margin-top: 12px;
-  font-size: 0.85rem;
+  margin-top: 14px;
+  font-size: 0.88rem;
   color: var(--muted);
   font-style: italic;
+  font-family: 'Newsreader', Georgia, serif;
   text-align: center;
 }
+.scroll-hint {
+  display: none;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+}
 
-/* papers list */
-.papers { list-style: none; counter-reset: p; padding: 0; margin: 0; }
+/* ----------------------------------------------------------
+   Papers list — Roman numerals in warm italic, no boxes.
+   ---------------------------------------------------------- */
+.papers {
+  list-style: none;
+  counter-reset: p;
+  padding: 0;
+  margin: 0;
+}
 .papers li {
   counter-increment: p;
   position: relative;
-  padding: 16px 0 16px 32px;
-  border-bottom: 1px solid var(--rule);
+  padding: 22px 0 22px 44px;
+  border-top: 1px solid var(--rule);
 }
-.papers li:last-child { border-bottom: 0; }
+.papers li:first-child { border-top: 0; padding-top: 4px; }
+.papers li:last-child { padding-bottom: 4px; }
 .papers li::before {
-  content: counter(p);
+  content: counter(p, upper-roman);
   position: absolute;
   left: 0;
-  top: 18px;
-  font-family: 'Fraunces', Georgia, serif;
+  top: 25px;
+  font-family: 'Instrument Serif', serif;
   font-style: italic;
-  color: var(--accent);
-  font-size: 0.95rem;
-}
-.paper-title {
-  font-family: 'Fraunces', Georgia, serif;
+  color: var(--rust);
   font-size: 1.05rem;
-  font-weight: 500;
-  margin-bottom: 4px;
+  letter-spacing: 0.05em;
 }
-.paper-meta { font-size: 0.9rem; color: var(--muted); margin-bottom: 6px; }
-.paper-meta a { color: var(--accent); text-decoration: none; }
-.paper-meta a:hover { text-decoration: underline; }
-.paper-note { font-size: 0.95rem; color: #333; }
+.papers li:first-child::before { top: 7px; }
+.paper-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  font-weight: 400;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.paper-meta {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-family: 'Inter', sans-serif;
+}
+.paper-meta a { color: var(--rust); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.paper-meta a:hover { border-color: var(--rust); }
+.paper-note {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 1.03rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
 
-/* news */
+/* ----------------------------------------------------------
+   Paper diagrams — SVG schematics drawn inline per paper.
+   See .diagram-lang and .diagram-cost in each page.
+   ---------------------------------------------------------- */
+.diagram {
+  margin: 18px 0 4px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  padding: 18px 16px;
+  position: relative;
+}
+.diagram svg { display: block; width: 100%; height: auto; }
+.diagram .d-caption {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+  font-family: 'Newsreader', serif;
+  text-align: center;
+}
+
+/* Paper 1 — language-as-evidence diagram */
+.diag-lang .lane { transition: opacity 0.25s ease; }
+.diag-lang .lane .box { transition: fill 0.25s ease, stroke 0.25s ease; }
+.diag-lang .lane .hidden-assumption {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.diag-lang.show-assumption .hidden-assumption { opacity: 1; }
+.diag-lang.focused .lane { opacity: 0.3; }
+.diag-lang .lane.on { opacity: 1; }
+.diag-lang .flow-arrow { stroke: var(--muted); stroke-width: 1.2; fill: none; }
+.diag-lang .label-strong { font-family: 'Instrument Serif', serif; font-style: italic; }
+.diag-lang .label-small { font-family: 'Inter', sans-serif; font-size: 10px; fill: var(--muted); }
+
+/* Paper 2 — cost incidence diagram */
+.diag-cost .bar { transition: width 0.6s cubic-bezier(.2,.6,.2,1), opacity 0.25s ease; }
+.diag-cost .bar-label { font-family: 'Inter', sans-serif; font-size: 11px; fill: var(--ink-soft); }
+.diag-cost .pay { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 10px; fill: var(--muted); }
+.diag-cost .axis { stroke: var(--rule); stroke-width: 1; }
+.diag-cost .ticks { font-family: 'Inter', sans-serif; font-size: 9px; fill: var(--muted); }
+
+/* ----------------------------------------------------------
+   News — hanging dates, no dashed lines
+   ---------------------------------------------------------- */
 .news { list-style: none; padding: 0; margin: 0; }
 .news li {
   display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 16px;
-  padding: 10px 0;
-  border-bottom: 1px dashed var(--rule);
-  font-size: 0.95rem;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  font-family: 'Newsreader', serif;
 }
-.news li:last-child { border-bottom: 0; }
+.news li:first-child { border-top: 0; }
 .news .date {
   color: var(--muted);
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Instrument Serif', serif;
   font-style: italic;
+  font-size: 0.95rem;
 }
 
-/* footer */
+/* ----------------------------------------------------------
+   Footer
+   ---------------------------------------------------------- */
 .footer {
-  margin-top: 72px;
-  padding-top: 24px;
+  margin-top: 96px;
+  padding-top: 28px;
   border-top: 1px solid var(--rule);
-  font-size: 0.85rem;
+  font-size: 0.86rem;
   color: var(--muted);
+  font-family: 'Inter', sans-serif;
 }
 .footer a { color: var(--muted); }
 
-/* responsive */
+/* ----------------------------------------------------------
+   Scroll-reveal animations
+   Elements with .reveal fade/translate in when they enter
+   the viewport. Honors prefers-reduced-motion.
+   ---------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.75s ease, transform 0.75s cubic-bezier(.2,.7,.2,1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero entrance stagger */
+.hero-text h1 { animation: fade-up 0.8s ease both; }
+.tagline { animation: fade-up 0.8s ease 0.15s both; }
+.bio { animation: fade-up 0.8s ease 0.3s both; }
+.contact { animation: fade-up 0.8s ease 0.45s both; }
+.hero-photo { animation: fade-up 0.8s ease 0.1s both; }
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.in,
+  .hero-text h1, .tagline, .bio, .contact, .hero-photo {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+  .diag-cost .bar { transition: none !important; }
+}
+
+/* ----------------------------------------------------------
+   Responsive — tablet
+   ---------------------------------------------------------- */
+@media (max-width: 760px) {
+  main { padding: 0 24px 88px; }
+  .nav { padding: 28px 24px 8px; }
+  .hero-text h1 { font-size: 2.9rem; }
+  .section { margin: 56px 0; padding-left: 16px; }
+}
+
+/* ----------------------------------------------------------
+   Responsive — mobile
+   ---------------------------------------------------------- */
 @media (max-width: 600px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-photo img { width: 100px; height: 100px; }
-  .hero-text h1 { font-size: 2rem; }
-  main, .nav { padding-left: 20px; padding-right: 20px; }
-  .news li { grid-template-columns: 1fr; gap: 2px; }
+  html, body { font-size: 16px; }
+
+  main { padding: 0 20px 72px; }
+  .nav {
+    padding: 20px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .brand { font-size: 1.2rem; }
+  .nav-links { gap: 16px; }
+  .nav-links a { font-size: 0.92rem; }
+
+  .painting .f1 { height: 20px; }
+  .painting .f3 { height: 16px; }
+  .painting .f5 { height: 10px; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin: 20px 0 60px;
+  }
+  .hero-photo { order: -1; }
+  .hero-photo img { width: 112px; height: 112px; }
+  .hero-text h1 { font-size: 2.4rem; }
+  .tagline { font-size: 1.1rem; }
+  .bio { font-size: 1.03rem; }
+
+  .section { margin: 48px 0; padding-left: 14px; }
+  .section-head h2 { font-size: 1.55rem; gap: 10px; }
+  .section-head h2::before { font-size: 0.78rem; }
+  .section-sub { font-size: 0.84rem; width: 100%; }
+
+  .sankey { padding: 14px; min-height: 420px; }
+  .scroll-hint { display: block; }
+
+  .papers li { padding: 18px 0 18px 36px; }
+  .papers li::before { font-size: 0.98rem; top: 21px; }
+  .paper-title { font-size: 1.15rem; }
+  .paper-meta { font-size: 0.86rem; }
+  .paper-note { font-size: 1rem; }
+
+  .diagram { padding: 14px 10px; }
+
+  .news li { grid-template-columns: 1fr; gap: 4px; padding: 10px 0; }
+  .news .date { font-size: 0.9rem; }
+
+  .footer { margin-top: 72px; }
+}
+
+/* ----------------------------------------------------------
+   Responsive — small phones
+   ---------------------------------------------------------- */
+@media (max-width: 400px) {
+  main { padding: 0 16px 64px; }
+  .nav { padding: 16px; }
+  .nav-links { gap: 12px; }
+  .nav-links a { font-size: 0.88rem; }
+  .brand { font-size: 1.1rem; }
+  .hero-text h1 { font-size: 2.15rem; }
+  .section-head h2 { font-size: 1.4rem; }
 }
