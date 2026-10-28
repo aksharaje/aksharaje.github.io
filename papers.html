@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papers · Akshara Raje</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="brand">akshara raje</a>
+    <div class="nav-links">
+      <a href="index.html">about</a>
+      <a href="papers.html" class="active">papers</a>
+      <a href="cv.html">cv</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="section-head">
+        <h2>Research threads</h2>
+        <p class="section-sub">Each paper, where it fits, what's next.</p>
+      </div>
+      <div id="sankey-threads" class="sankey"></div>
+      <p class="caption">Papers connect to the themes they explore and to the questions I want to pursue next.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head"><h2>All papers</h2></div>
+      <ol class="papers">
+        <li>
+          <div class="paper-title">Language as Evidence: A Forensic Investigation of Silent Jurisdictional Assumptions in a Reasoning Model</div>
+          <div class="paper-meta"><strong>Akshara Raje</strong> · preprint, 2026 · <a href="assets/jurisdiction-model-forensics.pdf">pdf</a></div>
+          <div class="paper-note">A language model asked a legal question in a language where no country is named still has to assume one. I investigate why Qwen3.6-27B tells English-speaking users its answer depends on where they live, whereas it answers the same questions in Chinese under mainland Chinese law without flagging the assumption. Using the model-forensics protocol, I read the model's reasoning to form hypotheses and test each with an intervention: rewriting Chinese questions in Traditional characters, forcing a casual style, resampling just before the model names a country. The behavior reflects an inference the model treats as settled rather than a failure to notice ambiguity.</div>
+        </li>
+        <li>
+          <div class="paper-title">Position: Accountability Mechanisms Are Adopted Only When the Verifier Pays Nothing</div>
+          <div class="paper-meta"><strong>Akshara Raje</strong> · preprint, 2026 · <a href="assets/provocation-paper.pdf">pdf</a></div>
+          <div class="paper-note">Proposals for accountability in agent-mediated work (AI use statements, detection, watermarking, content provenance) presuppose that the parties who would rely on them want them. I report a complete enumeration of 2,942 active job-posting queues on Upwork and Freelancer, hand-coded against a preregistered scheme and validated against injected positive controls. Requests for AI disclosure are near zero in either market. The mechanisms clients <em>do</em> adopt share a property the provenance stack lacks: each is free to the client, with its cost falling on the applicant. I argue cost incidence by whom pays to verify should be treated as a first-class design constraint, and that demand for accountability should be measured rather than assumed.</div>
+        </li>
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Akshara Raje · <a href="mailto:akshara.raje97@gmail.com">akshara.raje97@gmail.com</a></p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3"></script>
+  <script>
+    // Research-threads Sankey: Papers → Themes → PhD questions
+    const data = {
+      nodes: [
+        { id: "paper1", name: "Language as Evidence",       col: 0 },
+        { id: "paper2", name: "Verifier Pays Nothing",      col: 0 },
+        { id: "t1",     name: "Model forensics",            col: 1 },
+        { id: "t2",     name: "Silent defaults",            col: 1 },
+        { id: "t3",     name: "Empirical census",           col: 1 },
+        { id: "t4",     name: "Cost incidence",             col: 1 },
+        { id: "q1",     name: "Appropriate reliance",   col: 2 },
+        { id: "q2",     name: "End-user customization", col: 2 },
+        { id: "q3",     name: "Hidden assumptions",     col: 2 }
+      ],
+      links: [
+        { source: "paper1", target: "t1", value: 3 },
+        { source: "paper1", target: "t2", value: 2 },
+        { source: "paper2", target: "t2", value: 2 },
+        { source: "paper2", target: "t3", value: 3 },
+        { source: "paper2", target: "t4", value: 3 },
+        { source: "t1", target: "q3", value: 3 },
+        { source: "t2", target: "q1", value: 3 },
+        { source: "t2", target: "q2", value: 1 },
+        { source: "t3", target: "q2", value: 2 },
+        { source: "t4", target: "q2", value: 2 }
+      ]
+    };
+    const COLORS = ["#b4472e","#8a9a5b","#5b7a8a"];
+    function render() {
+      const c = document.getElementById("sankey-threads");
+      c.innerHTML = "";
+      const width = c.clientWidth - 32, height = 360;
+      const svg = d3.select(c).append("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+      const sankey = d3.sankey().nodeId(d=>d.id).nodeWidth(12).nodePadding(14)
+        .extent([[8,8],[width-8,height-8]]);
+      const g = sankey({ nodes: data.nodes.map(d=>({...d})), links: data.links.map(d=>({...d})) });
+      const color = d => COLORS[d.col % COLORS.length];
+      svg.append("g").selectAll("path").data(g.links).join("path")
+        .attr("class","link")
+        .attr("d", d3.sankeyLinkHorizontal())
+        .attr("stroke", d => d3.interpolateRgb(color(d.source), color(d.target))(0.5))
+        .attr("stroke-width", d => Math.max(1,d.width))
+        .append("title").text(d => `${d.source.name} → ${d.target.name}`);
+      const n = svg.append("g").selectAll("g").data(g.nodes).join("g").attr("class","node");
+      n.append("rect").attr("x",d=>d.x0).attr("y",d=>d.y0)
+        .attr("width",d=>d.x1-d.x0).attr("height",d=>Math.max(1,d.y1-d.y0))
+        .attr("fill",color).append("title").text(d=>d.name);
+      n.append("text")
+        .attr("x", d => d.col === 2 ? d.x0 - 6 : d.x1 + 6)
+        .attr("y", d => (d.y0+d.y1)/2).attr("dy","0.35em")
+        .attr("text-anchor", d => d.col === 2 ? "end" : "start")
+        .text(d => d.name);
+    }
+    let t; window.addEventListener("resize", () => { clearTimeout(t); t = setTimeout(render, 150); });
+    document.addEventListener("DOMContentLoaded", render);
+  </script>
+</body>
+</html>

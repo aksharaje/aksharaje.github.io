@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Akshara Raje</title>
+  <meta name="description" content="Akshara Raje: product manager and independent researcher. Interested in human–AI interaction, appropriate reliance, and end-user customization of AI." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="brand">akshara raje</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">about</a>
+      <a href="papers.html">papers</a>
+      <a href="cv.html">cv</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Akshara Raje</h1>
+        <p class="tagline">
+          <span id="rotating">thinking about appropriate reliance</span>
+        </p>
+        <p class="bio">
+          Hi, I'm Akshara, a product manager with an MBA. I spend a lot of my time thinking
+          about how people actually come to trust (and sometimes adapt) the AI tools they
+          use at work. The questions I care about came from the job: watching the gap
+          between what a model does and what the person using it assumes about it, and
+          realizing nobody really measures that gap. I'm exploring PhD opportunities
+          starting Fall 2027 in human–AI interaction, with a particular interest in
+          appropriate reliance and end-user customization of AI.
+        </p>
+        <p class="contact">
+          <a href="mailto:akshara.raje97@gmail.com">email</a> ·
+          <a href="https://github.com/aksharaje" target="_blank" rel="noopener">github</a> ·
+          <a href="https://www.linkedin.com/in/akshararaje/" target="_blank" rel="noopener">linkedin</a>
+        </p>
+      </div>
+      <div class="hero-photo">
+        <img src="assets/photo.jpg" alt="Akshara Raje" onerror="this.style.visibility='hidden'" />
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>How I got here</h2>
+        <p class="section-sub">Hover a thread to trace it. Click to isolate.</p>
+      </div>
+      <div id="sankey" class="sankey"></div>
+      <p class="caption">Early interests shaped the experiences I sought out, which led to specific projects and papers, which point toward the questions I want to pursue in a PhD.</p>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>Selected papers</h2>
+        <a class="section-link" href="papers.html">all →</a>
+      </div>
+      <ol class="papers">
+        <li>
+          <div class="paper-title">Language as Evidence: A Forensic Investigation of Silent Jurisdictional Assumptions in a Reasoning Model</div>
+          <div class="paper-meta"><strong>Akshara Raje</strong> · preprint, 2026 · <a href="assets/jurisdiction-model-forensics.pdf">pdf</a></div>
+          <div class="paper-note">Qwen3.6-27B warns English-speaking users that the answer to a legal question depends on their country, but silently assumes mainland Chinese law when asked in Chinese. A model-forensics investigation of what reasoning models treat as settled rather than ambiguous.</div>
+        </li>
+        <li>
+          <div class="paper-title">Position: Accountability Mechanisms Are Adopted Only When the Verifier Pays Nothing</div>
+          <div class="paper-meta"><strong>Akshara Raje</strong> · preprint, 2026 · <a href="assets/provocation-paper.pdf">pdf</a></div>
+          <div class="paper-note">A hand-coded census of 2,942 freelance job postings finds near-zero demand for AI disclosure, watermarking, or provenance, and argues the pattern follows from cost incidence: accountability is adopted only when the verifier doesn't pay for it.</div>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>News</h2>
+      </div>
+      <ul class="news">
+        <li><span class="date">Oct 2026</span> Posted preprint, <em>Accountability Mechanisms Are Adopted Only When the Verifier Pays Nothing</em>.</li>
+        <li><span class="date">Oct 2026</span> Posted preprint, <em>Language as Evidence: A Forensic Investigation of Silent Jurisdictional Assumptions in a Reasoning Model</em>.</li>
+        <li><span class="date">Feb 2026</span> Completed the Professional Certificate in Product Management at Kellogg.</li>
+        <li><span class="date">Nov 2025</span> Joined Ascendion as a Product Manager.</li>
+      </ul>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Akshara Raje · <a href="mailto:akshara.raje97@gmail.com">akshara.raje97@gmail.com</a></p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3"></script>
+  <script src="sankey.js"></script>
+  <script src="rotating.js"></script>
+</body>
+</html>

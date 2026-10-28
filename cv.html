@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV · Akshara Raje</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Timeline */
+    .timeline {
+      position: relative;
+      padding: 8px 0 8px 32px;
+      margin: 0;
+      list-style: none;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: var(--rule);
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 36px 20px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -29px;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--rule);
+    }
+    .tl-item.edu::before {
+      background: var(--bg);
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 2px var(--accent);
+    }
+    .tl-date {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      letter-spacing: 0.01em;
+    }
+    .tl-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.08rem;
+      font-weight: 500;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+    .tl-org {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .tl-org .where { color: #333; }
+    .tl-org .sep { opacity: 0.5; margin: 0 6px; }
+    .tl-points {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 0.95rem;
+      color: #333;
+    }
+    .tl-points li { margin-bottom: 6px; line-height: 1.55; }
+    .tl-points li:last-child { margin-bottom: 0; }
+
+    .tl-legend {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin: 0 0 24px 32px;
+      font-style: italic;
+    }
+    .tl-legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .tl-legend .dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent);
+    }
+    .tl-legend .dot.edu {
+      background: var(--bg);
+      box-shadow: inset 0 0 0 2px var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .timeline { padding-left: 24px; }
+      .tl-item { padding-left: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="brand">akshara raje</a>
+    <div class="nav-links">
+      <a href="index.html">about</a>
+      <a href="papers.html">papers</a>
+      <a href="cv.html" class="active">cv</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="section">
+      <div class="section-head">
+        <h2>Timeline</h2>
+        <p class="section-sub">Reverse-chronological. Hover a dot for the year.</p>
+      </div>
+
+      <p class="tl-legend">
+        <span><span class="dot"></span> work</span>
+        <span><span class="dot edu"></span> education</span>
+      </p>
+
+      <ol class="timeline">
+
+        <li class="tl-item">
+          <div class="tl-date">Nov 2025 – present</div>
+          <div class="tl-title">Product Manager</div>
+          <div class="tl-org"><span class="where">Ascendion</span><span class="sep">·</span>Boston, MA</div>
+          <ul class="tl-points">
+            <li>Own the Account Management scope for ~1/3 of a digital modernization program, translating requirements across Operations, Client Relations, Compliance, and Accounting.</li>
+            <li>Leveraged AI tools to synthesize ~800 legacy SQL procedures into state-specific business rules, partnering with Compliance to translate regulatory logic into product requirements and UI workflows.</li>
+            <li>Redesigned the account lifecycle into 8 primary, 26 secondary, and ~20 tertiary statuses, replacing legacy terminology for a 50–60-person organization.</li>
+            <li>Lead 4–5 discovery sessions weekly, translating user feedback into prioritized requirements, user stories, and acceptance criteria across Product, UX, Engineering, QA, Data, and Compliance.</li>
+            <li>Defined payment-adjustment automation for ~5,000 accounts/month, validating 5 scenarios and preparing 20–25 Jobs-to-be-Done for UAT and release readiness.</li>
+          </ul>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-date">Jun 2025 – Nov 2025</div>
+          <div class="tl-title">Business Strategy and Operations Associate</div>
+          <div class="tl-org"><span class="where">Charles Hudson Technology Solutions</span><span class="sep">·</span>Boston, MA</div>
+          <ul class="tl-points">
+            <li>Developed GTM and lead-generation strategy for a retail QA business, managing CRM pipelines and coordinating cross-functional client initiatives.</li>
+          </ul>
+        </li>
+
+        <li class="tl-item edu">
+          <div class="tl-date">Feb 2026</div>
+          <div class="tl-title">Professional Certificate in Product Management</div>
+          <div class="tl-org"><span class="where">Kellogg School of Management, Northwestern University</span><span class="sep">·</span>Evanston, IL</div>
+        </li>
+
+        <li class="tl-item edu">
+          <div class="tl-date">May 2025</div>
+          <div class="tl-title">MBA, Quantitative Finance</div>
+          <div class="tl-org"><span class="where">Babson College, F.W. Olin Graduate School of Business</span><span class="sep">·</span>Boston, MA</div>
+        </li>
+
+        <li class="tl-item">
+          <div class="tl-date">Oct 2021 – May 2023</div>
+          <div class="tl-title">Senior Analyst / Analyst</div>
+          <div class="tl-org"><span class="where">Goldman Sachs, Global Markets &amp; Banking Division</span><span class="sep">·</span>Bangalore, India</div>
+          <ul class="tl-points">
+            <li>Supported front-to-back workflows across FX, fixed income, derivatives, and structured products, translating operational issues into technology requirements.</li>
+            <li>Reduced a suspense reconciliation break sheet from ~20 outstanding breaks to 0 new breaks through root-cause remediation and process controls.</li>
+            <li>Improved SWIFT reconciliation with the designated clearinghouse, eliminating 15–20 minutes of daily manual investigation across hundreds of accounts.</li>
+            <li>Quantified trade-processing failures using break volume, resolution time, and settlement risk, securing technical prioritization for 3–4 daily breaks.</li>
+          </ul>
+        </li>
+
+        <li class="tl-item edu">
+          <div class="tl-date">Oct 2021</div>
+          <div class="tl-title">CFA Level I</div>
+          <div class="tl-org">Passed</div>
+        </li>
+
+        <li class="tl-item edu">
+          <div class="tl-date">May 2019</div>
+          <div class="tl-title">Bachelor's Degree, Economics</div>
+          <div class="tl-org"><span class="where">Symbiosis School for Liberal Arts</span><span class="sep">·</span>Pune, India</div>
+        </li>
+
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <p>© 2026 Akshara Raje · <a href="mailto:akshara.raje97@gmail.com">akshara.raje97@gmail.com</a></p>
+    </footer>
+  </main>
+</body>
+</html>
